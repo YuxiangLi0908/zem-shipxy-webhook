@@ -89,7 +89,7 @@ on:
 #
 # 2. Change these variables for your configuration:
 env:
-  AZURE_WEBAPP_NAME: zem-shipxy-webhook              # <-- your Azure App Service name
+  AZURE_WEBAPP_NAME: shipxy-webhook              # <-- your Azure App Service name
   WORKING_DIRECTORY: '.'                  # path to your app
   PYTHON_VERSION: '3.13'                  # Python version
   STARTUP_COMMAND: '/home/site/wwwroot/startup.sh'   # tells Azure to run startup.sh
