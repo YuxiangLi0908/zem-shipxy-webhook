@@ -4,7 +4,6 @@ sys.path.insert(0, "/home/site/wwwroot/.venv/lib/python3.13/site-packages")
 import asyncio
 import httpx
 import os
-import requests
 
 from datetime import datetime
 from sqlalchemy import create_engine
@@ -41,8 +40,7 @@ async def fetch_all_mmsi(api_key:str, imo_list: list[str]) -> list[dict[str: int
 
 async def fetch_all_mmsi_async():
     api_key = os.environ.get("SHIPXY_API_KEY")
-    # imo_list = get_vessel_imo()
-    imo_list = ["9972892", "9960514", "9955272"]
+    imo_list = get_vessel_imo()
     mmsi = await fetch_all_mmsi(api_key=api_key, imo_list=imo_list)
     return mmsi
 
