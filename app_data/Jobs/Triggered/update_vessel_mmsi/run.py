@@ -78,6 +78,7 @@ def get_vessel_imo() -> list[str]:
             AND target_retrieval_timestamp is null
             AND vessel_mmsi is null
             AND vessel_imo is not null
+            AND NOT cancel_notification
     """))
     db.close()
     result = result.mappings().all()
