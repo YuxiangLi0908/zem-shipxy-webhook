@@ -1,3 +1,6 @@
+import sys
+sys.path.insert(0, "/home/site/wwwroot/.venv/lib/python3.10/site-packages")
+
 import asyncio
 import httpx
 import os
