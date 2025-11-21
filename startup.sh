@@ -13,14 +13,6 @@ cd /home/site/wwwroot
 # Install dependencies
 poetry install --no-interaction --no-root
 
-############################################
-# Export and install dependencies for WebJobs
-############################################
-echo "Exporting requirements.txt from Poetry..."
-poetry export -f requirements.txt --without-hashes -o requirements.txt
-echo "Installing requirements for WebJobs..."
-pip install -r requirements.txt
-
 # Run FastAPI
 echo "Starting FastAPI with Uvicorn..."
 poetry run uvicorn app.main:app --host 0.0.0.0 --port 8000
