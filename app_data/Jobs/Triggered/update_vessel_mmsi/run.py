@@ -1,19 +1,19 @@
 import sys
+
 sys.path.insert(0, "/home/site/wwwroot/.venv/lib/python3.13/site-packages")
 
 import asyncio
-import httpx
 import os
-
 from datetime import datetime
-from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker
-from sqlalchemy import text
 
+import httpx
+from sqlalchemy import create_engine, text
+from sqlalchemy.orm import sessionmaker
 
 SEARCH_SHIP_URL = os.environ.get("SHIPXY_SEARCH_SHIP_URL")
 
-async def fetch_mmsi(api_key: str, imo: str) -> dict[str: int | None]:
+
+async def fetch_mmsi(api_key: str, imo: str) -> dict[str : int | None]:
     params = {
         "key": api_key,
         "keywords": imo,
@@ -30,10 +30,11 @@ async def fetch_mmsi(api_key: str, imo: str) -> dict[str: int | None]:
             result = {imo: None}
         return result
 
-async def fetch_all_mmsi(api_key:str, imo_list: list[str]) -> list[dict[str: int | None]]:
-    tasks = [
-        fetch_mmsi(api_key=api_key, imo=imo) for imo in imo_list
-    ]
+
+async def fetch_all_mmsi(
+    api_key: str, imo_list: list[str]
+) -> list[dict[str : int | None]]:
+    tasks = [fetch_mmsi(api_key=api_key, imo=imo) for imo in imo_list]
     result = await asyncio.gather(*tasks)
     return list(result)
 
@@ -66,7 +67,9 @@ def get_db():
 
 def get_vessel_imo() -> list[str]:
     db = get_db()
-    result = db.execute(text("""
+    result = db.execute(
+        text(
+            """
         SELECT distinct vessel_imo
         FROM warehouse_vessel a
         JOIN warehouse_order b
@@ -79,7 +82,9 @@ def get_vessel_imo() -> list[str]:
             AND vessel_mmsi is null
             AND vessel_imo is not null
             AND NOT cancel_notification
-    """))
+    """
+        )
+    )
     db.close()
     result = result.mappings().all()
     result = [d["vessel_imo"] for d in result]
@@ -99,11 +104,8 @@ def main():
     if len(rows) == 0:
         print("No vessel to search!")
         return 0
-    
-    values_sql = ",".join(
-        f"('{imo}', '{mmsi}')"
-        for imo, mmsi in rows
-    )
+
+    values_sql = ",".join(f"('{imo}', '{mmsi}')" for imo, mmsi in rows)
 
     sql = f"""
         UPDATE warehouse_vessel AS v

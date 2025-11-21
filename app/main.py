@@ -4,7 +4,6 @@ from fastapi.middleware.gzip import GZipMiddleware
 
 from app.api.router import api_router
 
-
 app = FastAPI()
 app.add_middleware(
     CORSMiddleware,
@@ -15,8 +14,10 @@ app.add_middleware(
 )
 app.add_middleware(GZipMiddleware)
 
+
 @app.get("/")
 def read_root():
     return {"message": "Hello from FastAPI on Azure App Service!"}
+
 
 app.include_router(api_router)
