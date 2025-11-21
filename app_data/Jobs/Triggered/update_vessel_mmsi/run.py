@@ -1,6 +1,11 @@
 import sys
 
-sys.path.insert(0, "/home/site/wwwroot/.venv/lib/python3.13/site-packages")
+UTIL_ROOT = os.path.abspath(os.path.join(os.getcwd(), "../../.."))
+PYTHON_ROOT = "/home/site/wwwroot/.venv/lib/python3.13/site-packages"
+if UTIL_ROOT not in sys.path:
+    sys.path.insert(0, UTIL_ROOT)
+if PYTHON_ROOT not in sys.path:
+    sys.path.insert(0, PYTHON_ROOT)
 
 import asyncio
 import os
