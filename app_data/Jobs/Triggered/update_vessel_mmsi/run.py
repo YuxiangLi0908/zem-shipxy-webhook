@@ -2,6 +2,7 @@ import os
 import sys
 
 UTIL_ROOT = os.path.abspath(os.path.join(os.getcwd(), "../../.."))
+print(UTIL_ROOT)
 PYTHON_ROOT = "/home/site/wwwroot/.venv/lib/python3.13/site-packages"
 if UTIL_ROOT not in sys.path:
     sys.path.insert(0, UTIL_ROOT)
