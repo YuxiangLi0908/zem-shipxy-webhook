@@ -11,7 +11,7 @@ from sqlalchemy.orm import sessionmaker
 from sqlalchemy import text
 
 
-SEARCH_SHIP_URL = "https://api.shipxy.com/apicall/v3/SearchShip"
+SEARCH_SHIP_URL = os.environ.get("SHIPXY_SEARCH_SHIP_URL")
 
 async def fetch_mmsi(api_key: str, imo: str) -> dict[str: int | None]:
     params = {
