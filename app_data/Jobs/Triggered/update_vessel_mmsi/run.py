@@ -1,3 +1,4 @@
+import os
 import sys
 
 UTIL_ROOT = os.path.abspath(os.path.join(os.getcwd(), "../../.."))
@@ -8,12 +9,10 @@ if PYTHON_ROOT not in sys.path:
     sys.path.insert(0, PYTHON_ROOT)
 
 import asyncio
-import os
 from datetime import datetime
 
 import httpx
-from sqlalchemy import create_engine, text
-from sqlalchemy.orm import Session, sessionmaker
+from sqlalchemy import text
 
 from utils.db_conn import get_db
 
