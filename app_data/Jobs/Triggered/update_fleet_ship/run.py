@@ -114,7 +114,7 @@ def main():
             print(ships_to_add)
 
             updated = update_add_to_shipxy(ships_to_add)
-            print(f"Updated {updated} vessels.")
+            print(f"Updated {updated} containers.")
         else:
             print(f"Adding ships failed: {resp.json()}.")
     else:

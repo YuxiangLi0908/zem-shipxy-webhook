@@ -23,7 +23,7 @@ async def fetch_mmsi(api_key: str, imo: str) -> dict[str : int | None]:
     params = {
         "key": api_key,
         "keywords": imo,
-        "max": 1,
+        "max": 20,
     }
 
     async with httpx.AsyncClient(timeout=30) as client:
@@ -31,7 +31,9 @@ async def fetch_mmsi(api_key: str, imo: str) -> dict[str : int | None]:
         resp.raise_for_status()
         data = resp.json()
         try:
-            result = {imo: data["data"][0]["mmsi"]}
+            records = data["data"]
+            latest = max(records, key=lambda r: r["last_time_utc"])
+            result = {imo: latest["mmsi"]}
         except:
             result = {imo: None}
         return result
