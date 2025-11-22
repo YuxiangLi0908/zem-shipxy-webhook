@@ -106,7 +106,7 @@ def main():
         if resp.status_code == 200:
             with get_db() as db:
                 record = ShipAdded(
-                    received_at=datetime.now(), header=resp.headers, body=resp.json()
+                    received_at=datetime.now(), header=dict(resp.headers), body=resp.json()
                 )
                 db.add(record)
                 db.commit()
@@ -132,7 +132,7 @@ def main():
         if resp.status_code == 200:
             with get_db() as db:
                 record = ShipDeleted(
-                    received_at=datetime.now(), header=resp.headers, body=resp.json()
+                    received_at=datetime.now(), header=dict(resp.headers), body=resp.json()
                 )
                 db.add(record)
                 db.commit()
