@@ -1,4 +1,4 @@
-from sqlalchemy import Column, DateTime, Integer, String
+from sqlalchemy import Boolean, Column, DateTime, Integer, String
 
 from app.data_models.db.base import Base
 
@@ -23,3 +23,4 @@ class Vessel(Base):
     vessel_eta_t49 = Column(DateTime, nullable=True)
     vessel_imo = Column(String(100), nullable=True)
     vessel_mmsi = Column(String(100), nullable=True)
+    add_to_shipxy = Column(Boolean, default=False)

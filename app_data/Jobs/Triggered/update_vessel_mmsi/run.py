@@ -1,8 +1,6 @@
-import os
 import sys
 
 UTIL_ROOT = "/home/site/wwwroot"
-print(UTIL_ROOT)
 PYTHON_ROOT = "/home/site/wwwroot/.venv/lib/python3.13/site-packages"
 if UTIL_ROOT not in sys.path:
     sys.path.insert(0, UTIL_ROOT)
@@ -10,6 +8,7 @@ if PYTHON_ROOT not in sys.path:
     sys.path.insert(0, PYTHON_ROOT)
 
 import asyncio
+import os
 from datetime import datetime
 
 import httpx
