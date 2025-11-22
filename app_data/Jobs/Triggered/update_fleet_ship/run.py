@@ -97,9 +97,11 @@ def main():
     if ships_to_add:
         resp = requests.post(
             url=ADD_SHIP_URL,
-            key=API_KEY,
-            fleet_id=FLEET_ID,
-            mmsis=",".join(ships_to_add),
+            params={
+                "key": API_KEY,
+                "fleet_id": FLEET_ID,
+                "mmsis": ",".join(ships_to_add),
+            }
         )
         if resp.status_code == 200:
             with get_db() as db:
@@ -121,9 +123,11 @@ def main():
     if ships_to_remove:
         resp = requests.post(
             url=REMOVE_SHIP_URL,
-            key=API_KEY,
-            fleet_id=FLEET_ID,
-            mmsis=",".join(ships_to_remove),
+            params={
+                "key": API_KEY,
+                "fleet_id": FLEET_ID,
+                "mmsis": ",".join(ships_to_add),
+            }
         )
         if resp.status_code == 200:
             with get_db() as db:
@@ -132,10 +136,10 @@ def main():
                 )
                 db.add(record)
                 db.commit()
-            print(f"Adding ships successed: {len(ships_to_remove)}.")
+            print(f"Removing ships successed: {len(ships_to_remove)}.")
             print(ships_to_remove)
         else:
-            print(f"Adding ships failed: {resp.json()}.")
+            print(f"Removing ships failed: {resp.json()}.")
     else:
         print("No ships to be removed.")
 
