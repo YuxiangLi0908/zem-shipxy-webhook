@@ -101,12 +101,14 @@ def main():
                 "key": API_KEY,
                 "fleet_id": FLEET_ID,
                 "mmsis": ",".join(ships_to_add),
-            }
+            },
         )
         if resp.status_code == 200:
             with get_db() as db:
                 record = ShipAdded(
-                    received_at=datetime.now(), header=dict(resp.headers), body=resp.json()
+                    received_at=datetime.now(),
+                    header=dict(resp.headers),
+                    body=resp.json(),
                 )
                 db.add(record)
                 db.commit()
@@ -127,12 +129,14 @@ def main():
                 "key": API_KEY,
                 "fleet_id": FLEET_ID,
                 "mmsis": ",".join(ships_to_add),
-            }
+            },
         )
         if resp.status_code == 200:
             with get_db() as db:
                 record = ShipDeleted(
-                    received_at=datetime.now(), header=dict(resp.headers), body=resp.json()
+                    received_at=datetime.now(),
+                    header=dict(resp.headers),
+                    body=resp.json(),
                 )
                 db.add(record)
                 db.commit()
