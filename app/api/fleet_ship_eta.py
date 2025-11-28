@@ -8,7 +8,7 @@ from utils.db_conn import get_db
 router = APIRouter()
 
 
-@router.post("/shipeta", status_code=status.HTTP_201_CREATED)
+@router.post("/shipeta", status_code=status.HTTP_200_OK)
 async def receive_ship_added(request: Request):
     """Receive ship-added POST requests and persist them to the DB.
 
