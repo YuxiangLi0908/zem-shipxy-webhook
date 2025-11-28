@@ -23,7 +23,7 @@ async def fetch_mmsi(api_key: str, imo: str) -> dict[str : int | None]:
     params = {
         "key": api_key,
         "keywords": imo,
-        "max": 20,
+        "max": 100,
     }
 
     async with httpx.AsyncClient(timeout=30) as client:
